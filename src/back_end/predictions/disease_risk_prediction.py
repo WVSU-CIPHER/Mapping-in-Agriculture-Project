@@ -1,0 +1,1 @@
+# returns detected diseases and its severity levels based on processed images

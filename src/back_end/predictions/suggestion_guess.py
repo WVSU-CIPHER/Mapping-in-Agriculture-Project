@@ -1,0 +1,1 @@
+# returns series of suggestions based on passed success_rate, disease_risks, and weather_impacts

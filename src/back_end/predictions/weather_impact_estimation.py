@@ -1,0 +1,1 @@
+# returns risk levels for each predicted future weather conditions to be used for success_rate_prediction and harvest_date_estimation
