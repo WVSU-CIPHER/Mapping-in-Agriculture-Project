@@ -69,7 +69,6 @@ class CropInfo:
         # returns all predicted disease names from the result
         # arg. result: crop prediction in json format
         # return: list of disease names in string
-
         disease_names = []
 
         disease_suggestions = result.get("result", {}).get("disease", {}).get("suggestions", [])
