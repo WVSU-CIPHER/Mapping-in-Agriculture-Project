@@ -2,12 +2,13 @@
 # returns series of image data to be passed onto prediction models
 
 import flet as ft
-import cv2, base64, threading, time, requests,  json
+import cv2, base64, threading, time, requests, json
 import numpy as np
 from typing import List, Dict, Tuple
 
-from config.settings import CROP_DETECTION_APIS
+from back_end.crop_info import CropInfo
 from back_end.geolocation import GeoLocation
+from config.settings import CROP_DETECTION_APIS
 
 class Camera:
     def __init__(self):
@@ -141,7 +142,7 @@ class ImageProcessing:
             raise Exception(f"Invalid JSON response: {response.text}")
         return response_in_json
 
-    def process_local_images(self, images: List[Tuple[np.ndarray, Tuple[float, float]]], api_index: int = 0) -> Tuple[str, Dict]:
+    def process_local_images(self, images: List[Tuple[np.ndarray, Tuple[float, float]]], api_index: int = 0) -> Dict:
         # processes a local image to detect and return cropped images of the top crop type
         # arg. images: list of images and their geolocation data
         # arg. api_index: index of the API configuration to use
@@ -154,27 +155,6 @@ class ImageProcessing:
             predictions = self.detect_crops(image, latitude, longitude, api_index)
             all_predictions.append(dict(predictions))
 
-        # variables to track the highest probability and corresponding prediction
-        max_probability = 0
-        highest_probability_prediction = None
-        highest_probability_name = None
+        highest_probability_prediction = CropInfo.get_top_prediction(all_predictions)
 
-        # evaluates all predictions
-        for prediction in all_predictions:
-            prediction_values = prediction.values()
-            
-            for key in prediction_values:
-                if not isinstance(key, dict):
-                    continue
-                
-                try:
-                    crop_suggestions = key.get("crop", {}).get("suggestions", [])
-                    for suggestion in crop_suggestions:
-                        if suggestion.get("probability", 0) > max_probability:
-                            max_probability = suggestion["probability"]
-                            highest_probability_prediction = prediction
-                            highest_probability_name = suggestion.get("name", "Unknown")
-                except KeyError as e:
-                    print("KeyError while processing prediction:", e)
-
-        return highest_probability_name, highest_probability_prediction if highest_probability_prediction else {}
+        return highest_probability_prediction if highest_probability_prediction else {}

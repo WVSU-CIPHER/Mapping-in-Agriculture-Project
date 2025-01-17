@@ -1,7 +1,7 @@
 import flet as ft
 
 from back_end.image_processing import Camera, ImageProcessing
-
+from back_end.crop_info import CropInfo
 
 def main(page: ft.Page):
     # page information of the app
@@ -24,8 +24,8 @@ def main(page: ft.Page):
             # captures the current video feed
             # calls by on_click button
             camera.capture_single_photo()
-            results = image_processor.process_local_images(camera.get_captured_images())
-            results_view(results)
+            result = image_processor.process_local_images(camera.get_captured_images())
+            results_view(result)
 
         single_camera_view = ft.View(
             "/single",
@@ -56,8 +56,8 @@ def main(page: ft.Page):
         def done_capturing(_):
             # processes all listed images captured
             # calls by on_click button
-            results = image_processor.process_local_images(camera.get_captured_images())
-            results_view(results)
+            result = image_processor.process_local_images(camera.get_captured_images())
+            results_view(result)
 
         multiple_camera_view = ft.View(
             "/multiple",
@@ -78,10 +78,12 @@ def main(page: ft.Page):
         page.views.append(multiple_camera_view)
         page.update()
 
-    def results_view(results):
+    def results_view(result):
         # displays the information and results
-        name, prediction = results
-        results_text = f"Detected Crop: {name}"
+        crop_name = CropInfo.get_top_crop_name(result)
+        scientific_disease_name = CropInfo.get_top_disease_name(result, True)
+
+        results_text = f"Crop Found!\n   Crop Name: {crop_name}\n   Disease Name: {scientific_disease_name}"
         results_view = ft.View(
             "/results",
             [
