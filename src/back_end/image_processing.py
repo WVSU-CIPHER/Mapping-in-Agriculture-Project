@@ -58,7 +58,7 @@ class Camera:
         if self.camera is None:
             return None
         ret, frame = self.camera.read()
-        self.append_frame(ret, frame)
+        self._append_frame(ret, frame)
         self.stop_live_feed()
         self.stop_camera()
 
@@ -67,9 +67,9 @@ class Camera:
         if self.camera is None:
             self.start_camera()
         ret, frame = self.camera.read()
-        self.append_frame(ret, frame)
+        self._append_frame(ret, frame)
     
-    def append_frame(self, ret, frame):
+    def _append_frame(self, ret, frame):
         # append to captured_images list with geolocation data
         if ret:
             try:
@@ -95,7 +95,7 @@ class ImageProcessing:
         # initializes the ImageProcessing class with API configurations
         self.api_details = CROP_DETECTION_APIS
     
-    def detect_crops(self, image: np.ndarray, latitude: float, longitude: float, api_index: int = 0) -> List[Dict]:
+    def _detect_crops(self, image: np.ndarray, latitude: float, longitude: float, api_index: int = 0) -> List[Dict]:
         # detects crops in an image using the specified API and returns the detection results
         # arg. image: input image as a NumPy array
         # arg. latitude: latitude of current location
@@ -152,7 +152,7 @@ class ImageProcessing:
         # processes each image
         for image, location in images:
             latitude, longitude = location
-            predictions = self.detect_crops(image, latitude, longitude, api_index)
+            predictions = self._detect_crops(image, latitude, longitude, api_index)
             all_predictions.append(dict(predictions))
 
         highest_probability_prediction = CropInfo.get_top_prediction(all_predictions)

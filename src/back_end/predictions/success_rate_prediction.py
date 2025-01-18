@@ -7,9 +7,9 @@ class CropSuccessRate:
     def __init__(self):
         # loads dataset
         # arg. csv_path: path to the csv file containing crop datas
-        self.data = self.load_data()
+        self.data = self._load_data()
 
-    def load_data(self):
+    def _load_data(self):
         # loads data from all CSV
         data = {}
         data["global_crop_data"] = pd.read_csv("./src/back_end/data/global_crop_data.csv")
@@ -17,7 +17,7 @@ class CropSuccessRate:
         data["geolocation_ranges"] = pd.read_csv("./src/config/geolocation_ranges.csv")
         return data
     
-    def calculate_geolocation_score(self, latitude: float, elevation: float) -> float:
+    def _calculate_geolocation_score(self, latitude: float, elevation: float) -> float:
         # calculates the geolocation score based on the coordinate and elevation
         # arg. latitude: latitude of the location
         # arg. longitude: longitude of the location
@@ -38,7 +38,7 @@ class CropSuccessRate:
 
         return 0.1  # defaults to low score for undefined ranges
 
-    def calculate_temperature_score(self, weather_temperature: float, min_thresold_temperature: float, max_thresold_temperature: float) -> float:
+    def _calculate_temperature_score(self, weather_temperature: float, min_thresold_temperature: float, max_thresold_temperature: float) -> float:
         # calculates the temperature score affecting thresholds
         # arg. weather_temperature: current temperature in celsius
         # arg. min_threshold_temperature: minimum temperature a crop can withstand
@@ -49,7 +49,7 @@ class CropSuccessRate:
         score = (weather_temperature - min_thresold_temperature) / (max_thresold_temperature - min_thresold_temperature) 
         return score
     
-    def calculate_precipitation_score(self, weather_precipitation: float, water_requirement: float, drought_tolerance: float) -> float:
+    def _calculate_precipitation_score(self, weather_precipitation: float, water_requirement: float, drought_tolerance: float) -> float:
         # calculates the precipitation score affecting of water requirement and drought tolerance
         # arg. weather_precipitation: current precipitation in mm
         # arg. water_requirement: water requirement for crop daily in mm
@@ -63,7 +63,7 @@ class CropSuccessRate:
         score = 1.0 - abs(weather_precipitation - water_requirement) / water_requirement
         return score
     
-    def calculate_wind_speed_score(self, weather_wind_speed: float, wind_tolerance: float) -> float:
+    def _calculate_wind_speed_score(self, weather_wind_speed: float, wind_tolerance: float) -> float:
         # calculates the wind speed score affecting of tolerance
         # arg. weather_wind_speed: current wind speed in km/h
         # arg. wind_tolerance: wind tolerance level of the crop in percentage
@@ -74,7 +74,7 @@ class CropSuccessRate:
         score = 1.0 - weather_wind_speed / max_tolerated_speed
         return score
     
-    def calculate_disease_score(self, crop_name: str, disease_name: str) -> float:
+    def _calculate_disease_score(self, crop_name: str, disease_name: str) -> float:
         # retrieves disease impact scores from the predefined data sets in csv
         # arg. crop_name: name of the crop in string
         # arg. disease_name: name of the disease in string
@@ -88,7 +88,7 @@ class CropSuccessRate:
             raise ValueError("Disease impact score not found.")
         return disease_row["impact_score"].iloc[0]
     
-    def get_global_crop_data(self, crop_name: str, disease_name: str):
+    def _get_global_crop_data(self, crop_name: str, disease_name: str):
         # retrieves crop data from the predefined data sets in csv
         # arg. crop_name: name of the crop in string
         # arg. disease_name: name of the disease in string
@@ -113,7 +113,7 @@ class CropSuccessRate:
         # return: success rate in float (normalized [0,1])
 
         # gets crop-specific data
-        crop_data = self.get_global_crop_data(crop_name)
+        crop_data = self._get_global_crop_data(crop_name)
         min_threshold_temperature = crop_data["min_threshold_temperature"]
         max_threshold_temperature = crop_data["max_threshold_temperature"]
         water_requirement = crop_data["water_requirement"]
@@ -121,11 +121,11 @@ class CropSuccessRate:
         wind_tolerance = crop_data["wind_tolerance"]
 
         # calculates individual scores with corresponding formula
-        geolocation_score = self.calculate_geolocation_score(latitude, elevation)
-        temperature_score = self.calculate_temperature_score(weather_temperature, min_threshold_temperature, max_threshold_temperature)
-        precipitation_score = self.calculate_precipitation_score(weather_precipitation, water_requirement, drought_tolerance)
-        wind_speed_score = self.calculate_wind_speed_score(weather_wind_speed, wind_tolerance)
-        disease_score = self.calculate_disease_score(crop_name, disease_name)
+        geolocation_score = self._calculate_geolocation_score(latitude, elevation)
+        temperature_score = self._calculate_temperature_score(weather_temperature, min_threshold_temperature, max_threshold_temperature)
+        precipitation_score = self._calculate_precipitation_score(weather_precipitation, water_requirement, drought_tolerance)
+        wind_speed_score = self._calculate_wind_speed_score(weather_wind_speed, wind_tolerance)
+        disease_score = self._calculate_disease_score(crop_name, disease_name)
 
         # combines scores with weighted average
         overall_score = (
