@@ -1,0 +1,11 @@
+crop_name,disease_name,impact_score
+Wheat,Fusarium_wilt,0.2
+Wheat,Rust,0.2
+Wheat,None,1.0
+Rice,Leaf_spot,0.4
+Rice,None,1.0
+Banana,Blight,0.3
+Banana,None,1.0
+Maize,Root_rot,0.3
+Maize,Blight,0.1
+Maize,None,1.0

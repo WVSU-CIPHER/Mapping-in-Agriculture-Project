@@ -1,0 +1,4 @@
+crop_name,min_threshold_temperature,max_threshold_temperature,water_requirement,drought_tolerance,wind_tolerance
+Wheat,0,35,450,30,20
+Rice,10,40,700,25,15
+Corn,5,30,500,20,18

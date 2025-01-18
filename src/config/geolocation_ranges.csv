@@ -1,0 +1,9 @@
+distance_from_equator_min,distance_from_equator_max,elevation_min,elevation_max,score
+0,15,0,500,1.0
+0,15,500,1000,0.8
+15,30,0,500,0.9
+15,30,500,1000,0.7
+30,60,0,500,0.7
+30,60,500,1000,0.5
+60,90,0,500,0.5
+60,90,500,1000,0.3

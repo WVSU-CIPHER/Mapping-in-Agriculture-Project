@@ -7,3 +7,11 @@ CROP_DETECTION_APIS = [
         "api_key": "LjGRHyw1lUBvE3h5meya26m81hBZ5qVP5CHN6iE9bqzgoG6F4L"
     }
 ]
+
+SUCCESS_RATE_WEIGHTED_AVERAGE = {
+    "geolocation_score_weight": 0.18,
+    "temperature_score_weight": 0.24,
+    "precipitation_score_weight": 0.22,
+    "wind_speed_score_weight": 0.08,
+    "disease_score_weight": 0.28
+}
