@@ -43,7 +43,7 @@ class CropDiseaseRisk:
         # arg. symptoms: listed symptoms of the disease in bullet form
         # arg. severity: severity of the disease
         # arg. spreading: spreading of the disease
-        # return: suggestions as a string
+        # return: risk value in float
 
         # generates the prompt
         prompt = self.generate_prompt(crop_name, disease_name, symptoms, severity, spreading)
