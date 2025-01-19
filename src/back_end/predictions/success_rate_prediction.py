@@ -13,7 +13,6 @@ class CropSuccessRate:
         # loads data from all CSV
         data = {}
         data["global_crop_data"] = pd.read_csv("./src/back_end/data/global_crop_data.csv")
-        data["disease_scores"] = pd.read_csv("./src/config/disease_scores.csv")
         data["geolocation_ranges"] = pd.read_csv("./src/config/geolocation_ranges.csv")
         return data
     
@@ -74,21 +73,7 @@ class CropSuccessRate:
         score = 1.0 - weather_wind_speed / max_tolerated_speed
         return score
     
-    def _calculate_disease_score(self, crop_name: str, disease_name: str) -> float:
-        # retrieves disease impact scores from the predefined data sets in csv
-        # arg. crop_name: name of the crop in string
-        # arg. disease_name: name of the disease in string
-        # return: disease impact score
-        disease_data = self.data["disease_scores"]
-        disease_row = disease_data[
-            (disease_data["crop_name"].str.lower().replace(" ", "_") == crop_name.lower().replace(" ", "_")) &
-            (disease_data["disease_name"].str.lower().replace(" ", "_") == disease_name.lower().replace(" ", "_"))
-        ]
-        if disease_row.empty:
-            raise ValueError("Disease impact score not found.")
-        return disease_row["impact_score"].iloc[0]
-    
-    def _get_global_crop_data(self, crop_name: str, disease_name: str):
+    def _get_global_crop_data(self, crop_name: str):
         # retrieves crop data from the predefined data sets in csv
         # arg. crop_name: name of the crop in string
         # arg. disease_name: name of the disease in string
@@ -101,15 +86,15 @@ class CropSuccessRate:
             raise ValueError("Crop and disease combination not found.")
         return crop_row.iloc[0]
     
-    def calculate_success_rate(self, crop_name: str, disease_name: str, latitude: float, elevation: float, weather_temperature: float, weather_precipitation: float, weather_wind_speed: float) -> float:
+    def calculate_success_rate(self, crop_name: str, latitude: float, elevation: float, weather_temperature: float, weather_precipitation: float, weather_wind_speed: float, disease_risk_value: float) -> float:
         # calculates the success rate of a crop
         # arg. crop_name: name of the crop in string
-        # arg. disease_name: name of the disease in string
         # arg. latitude: latitude of the location
         # arg. elevation: elevation of the location
         # arg. weather_temperature: current temperature of the weather
         # arg. weather_precipitation: current precipitation (mm) of the weather
         # arg. weather_wind_speed: current wind speed (km/h) of the weather
+        # arg. disease_risk_value: risk value from disease risk prediction 
         # return: success rate in float (normalized [0,1])
 
         # gets crop-specific data
@@ -125,7 +110,6 @@ class CropSuccessRate:
         temperature_score = self._calculate_temperature_score(weather_temperature, min_threshold_temperature, max_threshold_temperature)
         precipitation_score = self._calculate_precipitation_score(weather_precipitation, water_requirement, drought_tolerance)
         wind_speed_score = self._calculate_wind_speed_score(weather_wind_speed, wind_tolerance)
-        disease_score = self._calculate_disease_score(crop_name, disease_name)
 
         # combines scores with weighted average
         overall_score = (
@@ -133,6 +117,24 @@ class CropSuccessRate:
             success_weight["temperature_score_weight"] * temperature_score + 
             success_weight["precipitation_score_weight"] * precipitation_score + 
             success_weight["wind_speed_score_weight"] * wind_speed_score +
-            success_weight["disease_score_weight"] * disease_score
+            success_weight["disease_score_weight"] * disease_risk_value
         )
         return overall_score
+    
+# # [testing purposes]
+# if __name__ == "__main__":
+#     crop_disease_risk = CropSuccessRate()
+
+#     # Sample input
+#     crop_details = {
+#         "crop_name": "Wheat",
+#         "latitude": 10.25,
+#         "elevation": 123.25,
+#         "weather_temperature": 32.4,
+#         "weather_precipitation": 400,
+#         "weather_wind_speed": 5.3,
+#         "disease_risk_value": 0.2
+#     }
+
+#     success_rate = crop_disease_risk.calculate_success_rate(**crop_details)
+#     print(f"Success Rate: {success_rate}")
