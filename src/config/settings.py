@@ -26,11 +26,17 @@ WEATHER_APIS = [
 ]
 
 OPEN_APIS = [
-    {
+    {   # suggestion_guess.py
         "api_url": "https://api.groq.com/openai/v1",
         "api_key": "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",
         "temperature": 0.5,
         "max_completion_tokens": 512
+    },
+    {   # disease_risk_prediction.py
+        "api_url": "https://api.groq.com/openai/v1",
+        "api_key": "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",
+        "temperature": 0.5,
+        "max_completion_tokens": 256
     }
 ]
 
