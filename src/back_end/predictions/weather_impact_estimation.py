@@ -4,13 +4,18 @@ import requests
 from typing import Dict, Optional
 from config.settings import WEATHER_APIS
 
-class WeatherImpactAnalyzer:
+class CropWeatherImpact:
     def __init__(self):
+        # initializes api and data sets
         self.base_url = WEATHER_APIS[0]["api_url"]
         self.weather_forecast = []
         self.elevation = None
 
     def fetch_weather_data(self, latitude: float, longitude: float):
+        # gets weather data via api
+        # arg. latitude: current latitude of the location
+        # arg. longitude: current longitude of the location
+        # return: response from api
         params = WEATHER_APIS[0]["params"].copy()
         params.update({"latitude": latitude, "longitude": longitude}) 
 
@@ -24,6 +29,8 @@ class WeatherImpactAnalyzer:
             self.weather_forecast = []
 
     def _parse_weather_data(self, weather_data: Dict):
+        # separates data for each parameter
+        # arg. weather_data: response from api in json form
         daily_forecasts = weather_data.get('daily', {})
         dates = daily_forecasts.get('time', [])
         max_temps = daily_forecasts.get('temperature_2m_max', [])
@@ -45,23 +52,38 @@ class WeatherImpactAnalyzer:
         self.elevation = weather_data.get("elevation", None)
 
     def get_weather_data_for_day(self, day_index: int) -> Optional[Dict[str, float]]:
+        # returns weather data of a certain day
+        # arg. day_index: day in index (0: current, 1: next day, ...so on)
+        # return: weather forecast in dictionary
         if 0 <= day_index < len(self.weather_forecast):
             return self.weather_forecast[day_index]
         return None
 
     def get_temperature(self, day_index: int) -> Optional[float]:
+        # returns temperature (Celsius) of a certain day
+        # arg. day_index: day in index (0: current, 1: next day, ...so on)
+        # return: temperature (Celsius)
         day = self.get_weather_data_for_day(day_index)
         return day.get("temperature_max") if day else None
 
     def get_precipitation(self, day_index: int) -> Optional[float]:
+        # returns precipitation (mm) of a certain day
+        # arg. day_index: day in index (0: current, 1: next day, ...so on)
+        # return: precipitation (mm)
         day = self.get_weather_data_for_day(day_index)
         return day.get("precipitation") if day else None
 
     def get_wind_speed(self, day_index: int) -> Optional[float]:
+        # returns wind speed (m/s) of a certain day
+        # arg. day_index: day in index (0: current, 1: next day, ...so on)
+        # return: wind speed (m/s)
         day = self.get_weather_data_for_day(day_index)
         return day.get("wind_speed") if day else None
 
     def get_temperature_risk_level(self, value: float) -> str:
+        # returns risk level based on the value of temperature
+        # arg. value: value of weather temperature
+        # return: temperature risk level
         thresholds = {
             "High": (-float("inf"), 0),
             "Medium": (0, 5),
@@ -72,6 +94,9 @@ class WeatherImpactAnalyzer:
         return self._get_risk_level(value, thresholds)
 
     def get_precipitation_risk_level(self, value: float) -> str:
+        # returns risk level based on the value of precipitation
+        # arg. value: value of weather precipitation
+        # return: precipitation risk level
         thresholds = {
             "High": (50, float("inf")),
             "Medium": (20, 50),
@@ -80,6 +105,9 @@ class WeatherImpactAnalyzer:
         return self._get_risk_level(value, thresholds)
 
     def get_wind_speed_risk_level(self, value: float) -> str:
+        # returns risk level based on the value of wind speed
+        # arg. value: value of weather wind speed
+        # return: wind speed risk level
         thresholds = {
             "High": (20, float("inf")),
             "Medium": (10, 20),
@@ -88,6 +116,9 @@ class WeatherImpactAnalyzer:
         return self._get_risk_level(value, thresholds)
 
     def get_overall_risk(self, day_index: int) -> Optional[str]:
+        # returns the overall risk calculated from temperature, precipitation, and wind speed risk levels
+        # arg. day_index: day in index (0: current, 1: next day, ...so on)
+        # return: overall risk level
         day = self.get_weather_data_for_day(day_index)
         if not day:
             return None
@@ -111,6 +142,7 @@ class WeatherImpactAnalyzer:
         return next((risk for risk, (low, high) in thresholds.items() if low <= value <= high), "Low")
     
     def get_elevation(self) -> Optional[float]:
+        # returns the elevation based on latitude and longitude
         return self.elevation
 
 # # [testing purposes]
@@ -118,7 +150,7 @@ class WeatherImpactAnalyzer:
 #     latitude = 10.3157
 #     longitude = 123.8854
 
-#     analyzer = WeatherImpactAnalyzer()
+#     analyzer = CropWeatherImpact()
 #     analyzer.fetch_weather_data(latitude, longitude)
 
 #     day_index = 0

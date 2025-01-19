@@ -3,12 +3,17 @@
 import requests
 from config.settings import WEATHER_APIS
 
-class WeatherData:
+class WeatherInfo:
     def __init__(self):
+        # initializes api and data sets
         self.base_url = WEATHER_APIS[1]["api_url"]
         self.weather_data = None
 
     def fetch_weather_data(self, latitude, longitude):
+        # gets weather data via api
+        # arg. latitude: current latitude of the location
+        # arg. longitude: current longitude of the location
+        # return: response from api
         params = WEATHER_APIS[1]["params"].copy()
         params.update({"latitude": latitude, "longitude": longitude}) 
 
@@ -21,6 +26,7 @@ class WeatherData:
             self.weather_data = None
 
     def get_temperature(self):
+        # returns current temperature (Celsius)
         try:
             return self.weather_data['current_weather']['temperature']
         except KeyError:
@@ -28,6 +34,7 @@ class WeatherData:
             return None
 
     def get_humidity(self):
+        # returns current humidity (percentage)
         try:
             return self.weather_data['hourly']['relative_humidity_2m'][0]
         except KeyError:
@@ -35,6 +42,7 @@ class WeatherData:
             return None
 
     def get_wind_speed(self):
+        # returns wind speed (m/s)
         try:
             return self.weather_data['current_weather']['windspeed']
         except KeyError:
@@ -42,6 +50,7 @@ class WeatherData:
             return None
 
     def get_rainfall(self):
+        # returns rainfall (mm)
         try:
             return self.weather_data['hourly']['rain'][0]
         except KeyError:
@@ -49,6 +58,10 @@ class WeatherData:
             return None
 
     def _calculate_heat_index(self, temperature, humidity):
+        # calculates the heat index based on temperature and humidity
+        # arg. temperature: value of temperature in Celsius
+        # arg. humidity: value of humidity in percentage
+        # return: heat index in Celsius
         temp_f = (temperature * 9 / 5) + 32
 
         constants = [-42.379, 2.04901523, 10.14333127, -0.22475541, -0.00683783, -0.05481717, 0.00122874, 0.00085282, -0.00000199]
@@ -71,6 +84,7 @@ class WeatherData:
         return round(heat_index_c, 2)
 
     def get_heat_index(self):
+        # returns heat index in Celsius
         try:
             temperature = self.get_temperature()
             humidity = self.get_humidity()
@@ -87,7 +101,7 @@ class WeatherData:
 #     LATITUDE = 10.3157
 #     LONGITUDE = 123.8854
 
-#     weather = WeatherData()
+#     weather = WeatherInfo()
 #     weather.fetch_weather_data(LATITUDE, LONGITUDE)
 
 #     temperature = weather.get_temperature()
