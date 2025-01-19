@@ -25,6 +25,15 @@ WEATHER_APIS = [
     }
 ]
 
+OPEN_APIS = [
+    {
+        "api_url": "https://api.groq.com/openai/v1",
+        "api_key": "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",
+        "temperature": 0.5,
+        "max_completion_tokens": 512
+    }
+]
+
 SUCCESS_RATE_WEIGHTED_AVERAGE = {
     "geolocation_score_weight": 0.18,
     "temperature_score_weight": 0.24,
