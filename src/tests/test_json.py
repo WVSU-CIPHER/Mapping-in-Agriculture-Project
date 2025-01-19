@@ -9,7 +9,7 @@ RESPONSE = {
         "longitude": 16.608,
         "similar_images": True,
         "images": [
-            "https://crop.kindwise.com/media/images/1a5f0849a5d34a39add96afe60c75d0b.jpg"
+            "https://crop.kindwise.com/media/images/ed696a46a5c34f37b090417475adee8b.jpg"
         ],
         "datetime": "2024-03-13T09:42:15.948778+00:00"
     },
@@ -318,17 +318,24 @@ RESPONSE = {
 all_predictions = []
 all_predictions.append(dict(RESPONSE))  # extracts values as predictions
 
-highest_probability_prediction = CropInfo.get_top_prediction(all_predictions)
+crop_info = CropInfo()
+highest_probability_prediction = crop_info.get_top_prediction(all_predictions)
 
-crop_name = CropInfo.get_top_crop_name(highest_probability_prediction)
-crop_names = CropInfo.get_all_crop_names(highest_probability_prediction)
-disease_name = CropInfo.get_top_disease_name(highest_probability_prediction)
-disease_names = CropInfo.get_all_disease_names(highest_probability_prediction)
-
-scientific_crop_name = CropInfo.get_top_crop_name(highest_probability_prediction, True)
-scientific_crop_names = CropInfo.get_all_crop_names(highest_probability_prediction, True)
-scientific_disease_name = CropInfo.get_top_disease_name(highest_probability_prediction, True)
-scientific_disease_names = CropInfo.get_all_disease_names(highest_probability_prediction, True)
+crop_name = crop_info.get_top_crop_name(highest_probability_prediction)
+crop_names = crop_info.get_all_crop_names(highest_probability_prediction)
+disease_name = crop_info.get_top_disease_name(highest_probability_prediction)
+disease_names = crop_info.get_all_disease_names(highest_probability_prediction)
+scientific_crop_name = crop_info.get_top_crop_name(highest_probability_prediction, True)
+scientific_crop_names = crop_info.get_all_crop_names(highest_probability_prediction, True)
+scientific_disease_name = crop_info.get_top_disease_name(highest_probability_prediction, True)
+scientific_disease_names = crop_info.get_all_disease_names(highest_probability_prediction, True)
+symptoms = crop_info.get_all_disease_symptoms(highest_probability_prediction)
+severity = crop_info.get_disease_severity(highest_probability_prediction)
+spreading = crop_info.get_disease_spreading(highest_probability_prediction)
+preventions = crop_info.get_all_prevention_treatment(highest_probability_prediction)
+chemical_treatment = crop_info.get_all_chemical_treatment(highest_probability_prediction)
+biological_treatment = crop_info.get_all_biological_treatment(highest_probability_prediction)
+image_url = crop_info.get_image_url(highest_probability_prediction)
 
 # print(highest_probability_prediction)
 
@@ -343,3 +350,10 @@ print(f"Scientific Crop Name: {scientific_crop_name}")
 print(f"Scientific Crop Names: {scientific_crop_name}")
 print(f"Scientific Disease Name: {scientific_disease_name}")
 print(f"Scientific Disease Names: {scientific_disease_names}")
+print(f"Symptoms:\n{symptoms}")
+print(f"Severity:\n{severity}")
+print(f"Spreading:\n{spreading}")
+print(f"Preventions:\n{preventions}")
+print(f"Chemical Treatments:\n{chemical_treatment}")
+print(f"Biological Treatments:\n{biological_treatment}")
+print(f"Image Url: {image_url}")

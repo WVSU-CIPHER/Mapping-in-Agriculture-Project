@@ -11,6 +11,8 @@ class CropSuggestion:
             base_url = OPEN_APIS[0]["api_url"],
             api_key = OPEN_APIS[0]["api_key"]
         )
+        self.temperature = OPEN_APIS[0]["temperature"]
+        self.max_completion_tokens = OPEN_APIS[0]["max_completion_tokens"]
 
     def generate_prompt(self, crop_name: str, disease_name: str, success_rate: float, harvest_date: str, weather_risks: List[str], disease_risks: List[str], treatments: List[str]) -> str:
         # creates a detailed prompt for the Groq API based on the given inputs.
@@ -69,8 +71,8 @@ class CropSuggestion:
                 {"role": "user", "content": prompt},
             ],
             model = "llama-3.3-70b-versatile",
-            temperature = OPEN_APIS[0]["temperature"],
-            max_completion_tokens = OPEN_APIS[0]["max_completion_tokens"],
+            temperature = self.temperature,
+            max_completion_tokens = self.max_completion_tokens,
             top_p = 1,
             stop = None,
             stream = False,

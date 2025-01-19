@@ -1,9 +1,12 @@
 # returns a certain value, dictionary, or info from json
 
+import requests
+from PIL import Image
+from io import BytesIO
 from typing import Dict, List
 
 class CropInfo:
-    def get_top_prediction(results: List[Dict]) -> Dict:
+    def get_top_prediction(self, results: List[Dict]) -> Dict:
         # returns the top prediction with the highest probability from suggested crops
         # arg. result: list of crop predictions in json format
         # return: the complete json for the prediction with the highest probability
@@ -23,7 +26,7 @@ class CropInfo:
 
         return highest_probability_result
     
-    def get_top_crop_name(result: Dict, in_scientific: bool = False) -> str:
+    def get_top_crop_name(self, result: Dict, in_scientific: bool = False) -> str:
         # returns the crop name with the highest probability from suggested crops
         # arg. result: crop prediction in json format
         # return: crop name in string
@@ -38,7 +41,7 @@ class CropInfo:
         
         return crop_name
 
-    def get_all_crop_names(result: Dict, in_scientific: bool = False) -> List[str]:
+    def get_all_crop_names(self, result: Dict, in_scientific: bool = False) -> List[str]:
         # returns all predicted crop names from the result
         # arg. result: crop prediction in json format
         # return: list of crop names in string
@@ -50,7 +53,7 @@ class CropInfo:
 
         return crop_names
     
-    def get_top_disease_name(result: Dict, in_scientific: bool = False) -> str:
+    def get_top_disease_name(self, result: Dict, in_scientific: bool = False) -> str:
         # returns the disease name with the highest probability from suggested crops
         # arg. result: crop prediction in json format
         # return: disease name in string
@@ -65,7 +68,7 @@ class CropInfo:
 
         return disease_name
     
-    def get_all_disease_names(result: Dict, in_scientific: bool = False) -> List[str]:
+    def get_all_disease_names(self, result: Dict, in_scientific: bool = False) -> List[str]:
         # returns all predicted disease names from the result
         # arg. result: crop prediction in json format
         # return: list of disease names in string
@@ -76,3 +79,63 @@ class CropInfo:
             disease_names.append(suggestion["name"] if not in_scientific else suggestion["scientific_name"])
 
         return disease_names
+    
+    def _get_top_disease(self, result: Dict):
+        # returns the disease with the highest probability from the result in json form
+        # arg. result: crop prediction in json format
+        # return: disease in json form
+        diseases = result.get("result", {}).get("disease", {}).get("suggestions", [])
+        return max(diseases, key=lambda disease: disease["probability"])
+    
+    def get_all_disease_symptoms(self, result: Dict) -> str:
+        # returns all symptoms of the disease from the result
+        # arg. result: crop prediction in json format
+        # return: symptoms in bullet form with format: name - description
+        disease = self._get_top_disease(result)
+        symptoms = disease["details"].get("symptoms", {})
+        return "\n".join(f"- {name}:{description}" for name, description in symptoms.items())
+    
+    def get_disease_severity(self, result: Dict) -> str:
+        # returns the severity of the disease from the result
+        # arg. result: crop prediction in json format
+        # return: severity in string
+        disease = self._get_top_disease(result)
+        return disease["details"].get("severity", "Severity not available.")
+    
+    def get_disease_spreading(self, result: Dict) -> str:
+        # returns the spreading of the disease from the result
+        # arg. result: crop prediction in json format
+        # return: spreading in string
+        disease = self._get_top_disease(result)
+        return disease["details"].get("spreading", "Spreading information not available.")
+    
+    def get_all_prevention_treatment(self, result: Dict) -> str:
+        # returns all preventions for the disease from the result
+        # arg. result: crop prediction in json format
+        # return: preventions in bullet form
+        disease = self._get_top_disease(result)
+        prevention = disease["details"]["treatment"].get("prevention", [])
+        return "\n".join(f"- {item}" for item in prevention)
+    
+    def get_all_chemical_treatment(self, result: Dict) -> str:
+        # returns all chemical treatments for the disease from the result
+        # arg. result: crop prediction in json format
+        # return: chemical treatments in bullet form
+        disease = self._get_top_disease(result)
+        chemical_treatment = disease["details"]["treatment"].get("chemical treatment", [])
+        return "\n".join(f"- {item}" for item in chemical_treatment)
+    
+    def get_all_biological_treatment(self, result: Dict) -> str:
+        # returns all biological treatments for the disease from the result
+        # arg. result: crop prediction in json format
+        # return: biological treatments in bullet form
+        disease = self._get_top_disease(result)
+        biological_treatment = disease["details"]["treatment"].get("biological treatment", [])
+        return "\n".join(f"- {item}" for item in biological_treatment)
+    
+    def get_image_url(self, result: Dict):
+        # returns an image used from the result
+        # arg. result: crop prediction in json format
+        # return: image in jpg
+        image_url = result["input"]["images"][0]
+        return image_url
