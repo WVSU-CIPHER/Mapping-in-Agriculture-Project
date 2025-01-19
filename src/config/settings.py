@@ -29,12 +29,14 @@ OPEN_APIS = [
     {   # suggestion_guess.py
         "api_url": "https://api.groq.com/openai/v1",
         "api_key": "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",
+        "model": "llama-3.3-70b-versatile",
         "temperature": 0.5,
         "max_completion_tokens": 512
     },
     {   # disease_risk_prediction.py
         "api_url": "https://api.groq.com/openai/v1",
         "api_key": "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",
+        "model": "llama-3.3-70b-versatile",
         "temperature": 0.5,
         "max_completion_tokens": 256
     }

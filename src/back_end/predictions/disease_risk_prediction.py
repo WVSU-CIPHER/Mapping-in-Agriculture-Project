@@ -10,6 +10,7 @@ class CropDiseaseRisk:
             base_url = OPEN_APIS[1]["api_url"],
             api_key = OPEN_APIS[1]["api_key"]
         )
+        self.model = OPEN_APIS[1]["model"]
         self.temperature = OPEN_APIS[1]["temperature"]
         self.max_completion_tokens = OPEN_APIS[1]["max_completion_tokens"]
     
@@ -53,7 +54,7 @@ class CropDiseaseRisk:
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt},
             ],
-            model = "llama-3.3-70b-versatile",
+            model = self.model,
             temperature = self.temperature,
             max_completion_tokens = self.max_completion_tokens,
             top_p = 1,

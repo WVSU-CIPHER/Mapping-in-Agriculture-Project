@@ -11,6 +11,7 @@ class CropSuggestion:
             base_url = OPEN_APIS[0]["api_url"],
             api_key = OPEN_APIS[0]["api_key"]
         )
+        self.model = OPEN_APIS[0]["model"]
         self.temperature = OPEN_APIS[0]["temperature"]
         self.max_completion_tokens = OPEN_APIS[0]["max_completion_tokens"]
 
@@ -70,7 +71,7 @@ class CropSuggestion:
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt},
             ],
-            model = "llama-3.3-70b-versatile",
+            model = self.model,
             temperature = self.temperature,
             max_completion_tokens = self.max_completion_tokens,
             top_p = 1,
