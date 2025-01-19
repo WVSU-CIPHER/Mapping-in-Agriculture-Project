@@ -8,6 +8,23 @@ CROP_DETECTION_APIS = [
     }
 ]
 
+WEATHER_APIS = [
+    {
+        "api_url": "https://api.open-meteo.com/v1/forecast",
+        "params": {
+            "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max",
+            "timezone": "Asia/Manila"
+        }
+    },
+    {
+        "api_url": "https://api.open-meteo.com/v1/forecast",
+        "params": {
+            'hourly': 'temperature_2m,relative_humidity_2m,rain,wind_speed_10m',
+            'current_weather': True,
+        }
+    }
+]
+
 SUCCESS_RATE_WEIGHTED_AVERAGE = {
     "geolocation_score_weight": 0.18,
     "temperature_score_weight": 0.24,
