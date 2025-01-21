@@ -5,6 +5,7 @@ from PIL import Image
 from front_end.config.settings import LANDING_PAGE_CONFIG
 
 def landing_page(page: ft.Page, navigate_to):
+    
     page.scroll = LANDING_PAGE_CONFIG["scroll"]
     config = LANDING_PAGE_CONFIG
     images = config["images"]
@@ -78,14 +79,14 @@ def landing_page(page: ft.Page, navigate_to):
                                             ft.Text(
                                                 texts["title_lines"][0],
                                                 size=sizes["title_font_size"],
-                                                weight=ft.FontWeight.BOLD,
+                                                weight=ft.FontWeight.W_700,
                                                 color=colors["title_color"][0],
                                                 text_align=ft.TextAlign.LEFT,
                                             ),
                                             ft.Text(
                                                 texts["title_lines"][1],
                                                 size=sizes["title_font_size"],
-                                                weight=ft.FontWeight.BOLD,
+                                                weight=ft.FontWeight.W_700,
                                                 color=colors["title_color"][1],
                                                 text_align=ft.TextAlign.LEFT,
                                             ),
@@ -96,6 +97,7 @@ def landing_page(page: ft.Page, navigate_to):
                                     ft.Text(
                                         texts["subtitle"],
                                         size=sizes["subtitle_font_size"],
+                                        weight=ft.FontWeight.W_400,
                                         color=colors["subtitle_color"],
                                         text_align=ft.TextAlign.LEFT,
                                     ),

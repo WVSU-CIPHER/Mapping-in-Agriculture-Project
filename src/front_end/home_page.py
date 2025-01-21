@@ -7,7 +7,7 @@ from back_end.weather_info import WeatherInfo
 from back_end.database import Database
 
 def home_page(page: ft.Page, navigate_to):
-    
+
     page.scroll = HOME_PAGE_CONFIG["scroll"]
     config = HOME_PAGE_CONFIG
     images = config["images"]
@@ -205,7 +205,7 @@ def home_page(page: ft.Page, navigate_to):
                                                 controls=[
                                                     ft.Text(f"Farm Scan #{i+1}", size=sizes["medium_text"], weight=ft.FontWeight.BOLD, color=colors["general_info_color"]),
                                                     ft.Text(
-                                                        f"Crop Name: {latest_data[i]["data"]["crop_name"]}", 
+                                                        f"Crop Name: {latest_data[i]["data"]["crop_name"].title()}", 
                                                         size=sizes["small_text"], 
                                                         color=colors["general_info_color"]
                                                     ),

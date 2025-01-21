@@ -11,9 +11,9 @@ MAIN_CONFIG = {
 LANDING_PAGE_CONFIG = {
     "scroll": "disable",
     "images": {
-        "background_image": "src/assets/landing_background_image.png",
-        "top_image": "src/assets/landing_top_blur.png",
-        "logo_image": "src/assets/anilyze_logo.png",
+        "background_image": "src/assets/images/landing_background_image.png",
+        "top_image": "src/assets/images/landing_top_blur.png",
+        "logo_image": "src/assets/icons/anilyze_logo.png",
     },
     "texts": {
         "title_lines": ["THE FUTURE OF", "AGRICULTURAL MAPPING"],
@@ -44,18 +44,18 @@ HOME_PAGE_CONFIG = {
     "display_count_data": 10,
     "scroll": "disable",
     "images": {
-        "location_icon": "src/assets/location_icon.png",
-        "weather_icon": "src/assets/cloudy.png",
-        "heat_index_icon": "src/assets/heat_index_icon.png",
-        "humidity_icon": "src/assets/humidity_icon.png",
-        "precipitation_icon": "src/assets/precipitation_icon.png",
-        "wind_speed_icon": "src/assets/wind_speed_icon.png",
-        "success_rate_icon": "src/assets/success_rate_icon.png",
-        "home_selected_icon": "src/assets/home_selected_icon.png",
-        "analysis_unselected_icon": "src/assets/analysis_unselected_icon.png",
-        "logs_unselected_icon": "src/assets/logs_unselected_icon.png",
-        "profile_unselected_icon": "src/assets/profile_unselected_icon.png",
-        "camera_scan_icon": "src/assets/camera_scan_icon.png"
+        "location_icon": "src/assets/icons/location_icon.png",
+        "weather_icon": "src/assets/icons/cloudy.png",
+        "heat_index_icon": "src/assets/icons/heat_index_icon.png",
+        "humidity_icon": "src/assets/icons/humidity_icon.png",
+        "precipitation_icon": "src/assets/icons/precipitation_icon.png",
+        "wind_speed_icon": "src/assets/icons/wind_speed_icon.png",
+        "success_rate_icon": "src/assets/icons/success_rate_icon.png",
+        "home_selected_icon": "src/assets/icons/home_selected_icon.png",
+        "analysis_unselected_icon": "src/assets/icons/analysis_unselected_icon.png",
+        "logs_unselected_icon": "src/assets/icons/logs_unselected_icon.png",
+        "profile_unselected_icon": "src/assets/icons/profile_unselected_icon.png",
+        "camera_scan_icon": "src/assets/icons/camera_scan_icon.png"
     },
     "sizes": {
         "large_text": 18,
@@ -88,20 +88,20 @@ ANALYSIS_PAGE_CONFIG = {
     "display_count_data": 1,
     "scroll": "disable",
     "images": {
-        "location_icon": "src/assets/location_icon.png",
-        "weather_icon": "src/assets/cloudy.png",
-        "heat_index_icon": "src/assets/heat_index_icon.png",
-        "humidity_icon": "src/assets/humidity_icon.png",
-        "precipitation_icon": "src/assets/precipitation_icon.png",
-        "wind_speed_icon": "src/assets/wind_speed_icon.png",
-        "success_rate_icon": "src/assets/success_rate_icon.png",
-        "disease_risk_icon": "src/assets/disease_risk_icon.png",
-        "weather_impact_icon": "src/assets/weather_impact_icon.png",
-        "home_unselected_icon": "src/assets/home_unselected_icon.png",
-        "analysis_selected_icon": "src/assets/analysis_selected_icon.png",
-        "logs_unselected_icon": "src/assets/logs_unselected_icon.png",
-        "profile_unselected_icon": "src/assets/profile_unselected_icon.png",
-        "camera_scan_icon": "src/assets/camera_scan_icon.png"
+        "location_icon": "src/assets/icons/location_icon.png",
+        "weather_icon": "src/assets/icons/cloudy.png",
+        "heat_index_icon": "src/assets/icons/heat_index_icon.png",
+        "humidity_icon": "src/assets/icons/humidity_icon.png",
+        "precipitation_icon": "src/assets/icons/precipitation_icon.png",
+        "wind_speed_icon": "src/assets/icons/wind_speed_icon.png",
+        "success_rate_icon": "src/assets/icons/success_rate_icon.png",
+        "disease_risk_icon": "src/assets/icons/disease_risk_icon.png",
+        "weather_impact_icon": "src/assets/icons/weather_impact_icon.png",
+        "home_unselected_icon": "src/assets/icons/home_unselected_icon.png",
+        "analysis_selected_icon": "src/assets/icons/analysis_selected_icon.png",
+        "logs_unselected_icon": "src/assets/icons/logs_unselected_icon.png",
+        "profile_unselected_icon": "src/assets/icons/profile_unselected_icon.png",
+        "camera_scan_icon": "src/assets/icons/camera_scan_icon.png"
     },
     "sizes": {
         "large_text": 16,
@@ -134,8 +134,8 @@ ANALYSIS_PAGE_CONFIG = {
 
 SCAN_PAGE_CONFIG = {
     "images": {
-        "back_icon": "src/assets/back_icon.png",
-        "capture_icon": "src/assets/capture_icon.png",
+        "back_icon": "src/assets/icons/back_icon.png",
+        "capture_icon": "src/assets/icons/capture_icon.png",
     },
     "colors": {
         "body_color": "#F6EDED",

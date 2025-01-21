@@ -216,7 +216,7 @@ def analysis_page(page: ft.Page, navigate_to):
                                             color=colors["prediction_info_data_color"]
                                         ),
                                         ft.Text(
-                                            latest_data[0]['data']['crop_name'],
+                                            latest_data[0]['data']['crop_name'].title(),
                                             size=sizes["small_text"],
                                             weight=ft.FontWeight.BOLD,
                                             color=colors["prediction_info_data_color"]
@@ -229,7 +229,7 @@ def analysis_page(page: ft.Page, navigate_to):
                                             color=colors["prediction_info_data_color"]
                                         ),
                                         ft.Text(
-                                            latest_data[0]['data']['disease_risks']['disease_name'],
+                                            latest_data[0]['data']['disease_risks']['disease_name'].capitalize(),
                                             size=sizes["small_text"],
                                             weight=ft.FontWeight.BOLD,
                                             color=colors["prediction_info_data_color"]
