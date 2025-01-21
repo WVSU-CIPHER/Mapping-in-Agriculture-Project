@@ -1,7 +1,7 @@
 # returns detected diseases and its severity levels based on processed images
 
 import openai, json, re
-from config.settings import OPEN_APIS
+from back_end.config.settings import OPEN_APIS
 
 class CropDiseaseRisk:
     def __init__(self):

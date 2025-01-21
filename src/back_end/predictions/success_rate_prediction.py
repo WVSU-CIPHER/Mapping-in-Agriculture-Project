@@ -1,7 +1,7 @@
 # returns success rates based on processed images
 
 import pandas as pd
-from config.settings import SUCCESS_RATE_WEIGHTED_AVERAGE as success_weight
+from back_end.config.settings import SUCCESS_RATE_WEIGHTED_AVERAGE as success_weight
 
 class CropSuccessRate:
     def __init__(self):

@@ -2,7 +2,7 @@
 
 import requests
 from typing import Dict, Optional
-from config.settings import WEATHER_APIS
+from back_end.config.settings import WEATHER_APIS
 
 class CropWeatherImpact:
     def __init__(self):

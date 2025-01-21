@@ -1,4 +1,4 @@
-# contains configuration settings to be used globally
+# contains configuration settings to be used for back-end side
 # (e.g., api keys, database urls if necessary)
 
 CROP_DETECTION_APIS = [

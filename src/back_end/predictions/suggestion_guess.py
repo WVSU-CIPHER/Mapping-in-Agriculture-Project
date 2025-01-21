@@ -2,7 +2,7 @@
 
 import openai
 from typing import List
-from config.settings import OPEN_APIS
+from back_end.config.settings import OPEN_APIS
 
 class CropSuggestion:
     def __init__(self):

@@ -8,7 +8,7 @@ from typing import List, Dict, Tuple
 
 from back_end.crop_info import CropInfo
 from back_end.geolocation import GeoLocation
-from config.settings import CROP_DETECTION_APIS
+from back_end.config.settings import CROP_DETECTION_APIS
 
 class Camera:
     def __init__(self):
