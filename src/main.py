@@ -3,7 +3,6 @@
 # cmd: flet run
 
 import flet as ft
-from front_end.landing_page import landing_page
 from front_end.config.settings import MAIN_CONFIG
 
 def main(page: ft.Page):
@@ -21,6 +20,7 @@ def main(page: ft.Page):
         page.update()
 
     # displays landing page initially
+    from front_end.landing_page import landing_page
     navigate_to(lambda p: landing_page(p, navigate_to))
 
 ft.app(target=main)

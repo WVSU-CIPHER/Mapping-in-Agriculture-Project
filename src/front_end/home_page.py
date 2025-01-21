@@ -27,7 +27,8 @@ def home_page(page: ft.Page, navigate_to):
         pass
         
     def route_to_analytics(e):
-        pass
+        from front_end.analysis_page import analysis_page
+        navigate_to(lambda p: analysis_page(p, navigate_to))
         
     def route_to_camera(e):
         pass
@@ -70,6 +71,7 @@ def home_page(page: ft.Page, navigate_to):
                             controls=[
                                 ft.Row(
                                     alignment=ft.MainAxisAlignment.END,
+                                    spacing=0,
                                     controls=[
                                         ft.Image(src=images["weather_icon"]),
                                         ft.Text(
@@ -81,11 +83,12 @@ def home_page(page: ft.Page, navigate_to):
                                 ),
                                 ft.Row(
                                     alignment=ft.MainAxisAlignment.END,
+                                    spacing=2,
                                     controls=[
                                         ft.Image(src=images["location_icon"]),
                                         ft.Text(
                                             f"{geolocation.get_address_from_coordinates(geo_latitude, geo_longitude)}", 
-                                            size=sizes["small_text"], 
+                                            size=sizes["extra_small_text"], 
                                             color=colors["header_text_color"]
                                         ),
                                     ],

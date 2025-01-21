@@ -32,6 +32,7 @@ class GeoLocation:
             return latitude, longitude
 
         except requests.RequestException as e:
+            return 10.712403, 122.560260    # default, to be removed
             raise Exception(f"Failed to fetch location data: {e}")
     
     def get_address_from_coordinates(self, latitude: float, longitude: float) -> str:
@@ -48,11 +49,11 @@ class GeoLocation:
                 if components:
                     return ", ".join(components)
                 
-            return "Location not found"
+            return "Unknown"
         except GeocoderTimedOut:
-            return "Timeout while fetching location"
+            return "Unknown"
         except Exception as e:
-            return f"Error getting location: {str(e)}"
+            return f"Unknown"
         
 class DateTime:
     def get_current_weekday(self) -> str:

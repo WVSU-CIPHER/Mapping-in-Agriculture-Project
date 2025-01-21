@@ -2,7 +2,6 @@
 
 import flet as ft
 from PIL import Image
-from front_end.home_page import home_page
 from front_end.config.settings import LANDING_PAGE_CONFIG
 
 def landing_page(page: ft.Page, navigate_to):
@@ -12,6 +11,10 @@ def landing_page(page: ft.Page, navigate_to):
     texts = config["texts"]
     sizes = config["sizes"]
     colors = config["colors"]
+
+    def route_to_home(e):
+        from front_end.home_page import home_page
+        navigate_to(lambda p: home_page(p, navigate_to))
 
     def get_dynamic_size(page, img_path, fit_type="cover"):
         # calculates dynamic image size to fit the app's dimensions based on the fit type.
@@ -56,7 +59,6 @@ def landing_page(page: ft.Page, navigate_to):
                 ft.Image(
                     src=images["top_image"],
                     fit=ft.ImageFit.COVER,
-                    opacity=0.7,
                     width=get_dynamic_size(page, images["top_image"], "cover")[0],
                     height=get_dynamic_size(page, images["top_image"], "contain")[1],
                 ),
@@ -125,7 +127,7 @@ def landing_page(page: ft.Page, navigate_to):
                                 ),
                                 width=sizes["button_width"],
                                 height=sizes["button_height"],
-                                on_click=lambda _: navigate_to(lambda p: home_page(p, navigate_to)),
+                                on_click=route_to_home,
                             ),
                             alignment=ft.alignment.bottom_center,
                             padding=ft.padding.only(

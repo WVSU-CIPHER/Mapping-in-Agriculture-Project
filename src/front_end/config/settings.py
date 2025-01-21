@@ -83,3 +83,51 @@ HOME_PAGE_CONFIG = {
         "camera_scan_background_color": "#68911B",
     }
 }
+
+ANALYSIS_PAGE_CONFIG = {
+    "display_count_data": 1,
+    "scroll": "disable",
+    "images": {
+        "location_icon": "src/assets/location_icon.png",
+        "weather_icon": "src/assets/cloudy.png",
+        "heat_index_icon": "src/assets/heat_index_icon.png",
+        "humidity_icon": "src/assets/humidity_icon.png",
+        "precipitation_icon": "src/assets/precipitation_icon.png",
+        "wind_speed_icon": "src/assets/wind_speed_icon.png",
+        "success_rate_icon": "src/assets/success_rate_icon.png",
+        "disease_risk_icon": "src/assets/disease_risk_icon.png",
+        "weather_impact_icon": "src/assets/weather_impact_icon.png",
+        "home_unselected_icon": "src/assets/home_unselected_icon.png",
+        "analysis_selected_icon": "src/assets/analysis_selected_icon.png",
+        "logs_unselected_icon": "src/assets/logs_unselected_icon.png",
+        "profile_unselected_icon": "src/assets/profile_unselected_icon.png",
+        "camera_scan_icon": "src/assets/camera_scan_icon.png"
+    },
+    "sizes": {
+        "large_text": 16,
+        "medium_text": 14,
+        "small_text": 12,
+        "extra_small_text": 10,
+        "super_extra_small_text": 8,
+        "button_border_width": 4,
+    },
+    "colors": {
+        "header_color": "#68911B",
+        "header_text_color": "#FFFFFF",
+        "weather_container_color": "#FFFFFF",
+        "weather_info_data_color": "#000000",
+        "weather_info_name_color": "#A26821",
+        "body_color": "#F6EDED",
+        "body_title_color": "#000000",
+        "data_container_color": "#FFFFFF",
+        "general_info_color": "#000000",
+        "prediction_info_data_color": "#1E1E1E",
+        "prediction_info_name_color": "#00663A",
+        "graph_bar_color": "#64780D",
+        "graph_grid_color": "#ABAAAA",
+        "navigation_color": "#FFFFFF",
+        "selected_text_color": "#68911B",
+        "unselected_text_color": "#ABAAAA",
+        "camera_scan_background_color": "#68911B",
+    }
+}
