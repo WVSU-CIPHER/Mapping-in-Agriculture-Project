@@ -131,12 +131,19 @@ class CropWeatherImpact:
         precipitation_risk = self.get_precipitation_risk_level(precipitation) if precipitation is not None else "Low"
         wind_risk = self.get_wind_speed_risk_level(wind_speed) if wind_speed is not None else "Low"
 
-        risk_priority = {"Low": 0, "Moderate": 1, "High": 2}
+        risk_values = {"Low": 0, "Moderate": 1, "High": 2}
 
-        return max(
-            {temperature_risk, precipitation_risk, wind_risk},
-            key=lambda risk: risk_priority[risk]
-        )
+        # calculate average risk level
+        avg_risk = (risk_values[temperature_risk] + 
+                    risk_values[precipitation_risk] + 
+                    risk_values[wind_risk]) / 3.0
+
+        if avg_risk < 0.67:
+            return "Low"
+        elif avg_risk < 1.33:
+            return "Moderate"
+        else:
+            return "High"
 
     def _get_risk_level(self, value: float, thresholds: Dict[str, tuple]) -> str:
         return next((risk for risk, (low, high) in thresholds.items() if low <= value <= high), "Low")
