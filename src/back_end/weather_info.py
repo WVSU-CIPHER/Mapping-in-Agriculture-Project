@@ -1,7 +1,7 @@
 # returns weather information of the current hour at latitude and longitude
 
 import requests
-from config.settings import WEATHER_APIS
+from back_end.config.settings import WEATHER_APIS
 
 class WeatherInfo:
     def __init__(self):

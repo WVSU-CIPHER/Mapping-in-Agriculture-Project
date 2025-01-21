@@ -3,12 +3,16 @@
 
 import requests
 from typing import Tuple
+from geopy.geocoders import Nominatim
+from geopy.exc import GeocoderTimedOut
+from datetime import datetime
 
 class GeoLocation:
     def __init__(self, ip_api_url: str = "https://ipinfo.io"):
         # initializes the GeoLocation class with the IP-based geolocation API URL.
         # arg. ip_api_url : URL of the IP-based geolocation API.
         self.ip_api_url = ip_api_url
+        self.geolocator = Nominatim(user_agent="my_app")
 
     def get_current_location(self) -> Tuple[float, float]:
         # fetches the current latitude and longitude of the device's location.
@@ -29,3 +33,34 @@ class GeoLocation:
 
         except requests.RequestException as e:
             raise Exception(f"Failed to fetch location data: {e}")
+    
+    def get_address_from_coordinates(self, latitude: float, longitude: float) -> str:
+        try:
+            location = self.geolocator.reverse((latitude, longitude))
+            if location:
+                address = location.raw.get('address', {})
+                city = address.get('city', '')
+                state = address.get('state', '')
+                country = address.get('country', '')
+                
+                # Filter out empty components and join with commas
+                components = [comp for comp in [city, state, country] if comp]
+                if components:
+                    return ", ".join(components)
+                
+            return "Location not found"
+        except GeocoderTimedOut:
+            return "Timeout while fetching location"
+        except Exception as e:
+            return f"Error getting location: {str(e)}"
+        
+class DateTime:
+    def get_current_weekday(self) -> str:
+        # returns current day of the week
+        weekday = datetime.now().strftime("%A")
+        return str(weekday)
+    
+    def get_current_day(self) -> str:
+        # returns formatted date string
+        date = datetime.now().strftime("%d %b %Y")
+        return str(date)
