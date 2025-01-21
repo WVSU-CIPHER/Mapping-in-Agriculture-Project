@@ -336,6 +336,7 @@ preventions = crop_info.get_all_prevention_treatment(highest_probability_predict
 chemical_treatment = crop_info.get_all_chemical_treatment(highest_probability_prediction)
 biological_treatment = crop_info.get_all_biological_treatment(highest_probability_prediction)
 image_url = crop_info.get_image_url(highest_probability_prediction)
+date, time = crop_info.get_datetime(highest_probability_prediction)
 
 # print(highest_probability_prediction)
 
@@ -357,3 +358,5 @@ print(f"Preventions:\n{preventions}")
 print(f"Chemical Treatments:\n{chemical_treatment}")
 print(f"Biological Treatments:\n{biological_treatment}")
 print(f"Image Url: {image_url}")
+print(f"Date: {date}")
+print(f"Time: {time}")

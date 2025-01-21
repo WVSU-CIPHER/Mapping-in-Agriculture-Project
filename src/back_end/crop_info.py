@@ -1,6 +1,8 @@
 # returns a certain value, dictionary, or info from json
 
 from typing import Dict, List
+from datetime import datetime
+import pytz
 
 class CropInfo:
     def get_top_prediction(self, results: List[Dict]) -> Dict:
@@ -136,3 +138,26 @@ class CropInfo:
         # return: image in jpg
         image_url = result["input"]["images"][0]
         return image_url
+    
+    def get_datetime(self, result: Dict) -> str:
+        # returns the datetime from the result
+        # arg. result: crop prediction in json format
+        # return: date and time
+
+        try:
+            # gets and parses the input datetime string to a datetime object
+            datetime_string = result["input"]["datetime"]
+            utc_dt = datetime.fromisoformat(datetime_string)
+            
+            # converts the datetime to GMT+8
+            gmt8 = pytz.timezone("Asia/Manila")
+            gmt8_dt = utc_dt.astimezone(gmt8)
+            
+            # extracts date and time
+            date = gmt8_dt.strftime("%Y-%m-%d")
+            time = gmt8_dt.strftime("%H:%M:%S")
+            
+            return date, time
+        except ValueError:
+            print(f"Invalid datetime format: {datetime_string}")
+            return None, None
