@@ -131,3 +131,14 @@ ANALYSIS_PAGE_CONFIG = {
         "camera_scan_background_color": "#68911B",
     }
 }
+
+SCAN_PAGE_CONFIG = {
+    "images": {
+        "back_icon": "src/assets/back_icon.png",
+        "capture_icon": "src/assets/capture_icon.png",
+    },
+    "colors": {
+        "body_color": "#F6EDED",
+        "camera_background": "#FFFFFF",
+    }
+}

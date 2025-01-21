@@ -13,7 +13,7 @@ class CropSuccessRate:
         # loads data from all CSV
         data = {}
         data["global_crop_data"] = pd.read_csv("./src/back_end/data/global_crop_data.csv")
-        data["geolocation_ranges"] = pd.read_csv("./src/config/geolocation_ranges.csv")
+        data["geolocation_ranges"] = pd.read_csv("./src/back_end/config/geolocation_ranges.csv")
         return data
     
     def _calculate_geolocation_score(self, latitude: float, elevation: float) -> float:

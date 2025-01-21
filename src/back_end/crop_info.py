@@ -5,7 +5,7 @@ from datetime import datetime
 import pytz
 
 class CropInfo:
-    def get_top_prediction(self, results: List[Dict]) -> Dict:
+    def get_top_prediction(self, results):
         # returns the top prediction with the highest probability from suggested crops
         # arg. result: list of crop predictions in json format
         # return: the complete json for the prediction with the highest probability
@@ -87,49 +87,57 @@ class CropInfo:
         return max(diseases, key=lambda disease: disease["probability"])
     
     def get_all_disease_symptoms(self, result: Dict) -> str:
-        # returns all symptoms of the disease from the result
-        # arg. result: crop prediction in json format
+        # Returns all symptoms of the disease from the result
+        # arg. result: crop prediction in JSON format
         # return: symptoms in bullet form with format: name - description
         disease = self._get_top_disease(result)
-        symptoms = disease["details"].get("symptoms", {})
-        return "\n".join(f"- {name}:{description}" for name, description in symptoms.items())
-    
+        symptoms = disease.get("details", {}).get("symptoms")
+        if not symptoms:
+            return "None"
+        return "\n".join(f"- {name}: {description}" for name, description in symptoms.items())
+
     def get_disease_severity(self, result: Dict) -> str:
-        # returns the severity of the disease from the result
-        # arg. result: crop prediction in json format
+        # Returns the severity of the disease from the result
+        # arg. result: crop prediction in JSON format
         # return: severity in string
         disease = self._get_top_disease(result)
-        return disease["details"].get("severity", "Severity not available.")
-    
+        return disease.get("details", {}).get("severity", "None")
+
     def get_disease_spreading(self, result: Dict) -> str:
-        # returns the spreading of the disease from the result
-        # arg. result: crop prediction in json format
+        # Returns the spreading of the disease from the result
+        # arg. result: crop prediction in JSON format
         # return: spreading in string
         disease = self._get_top_disease(result)
-        return disease["details"].get("spreading", "Spreading information not available.")
-    
+        return disease.get("details", {}).get("spreading", "None")
+
     def get_all_prevention_treatment(self, result: Dict) -> str:
-        # returns all preventions for the disease from the result
-        # arg. result: crop prediction in json format
+        # Returns all preventions for the disease from the result
+        # arg. result: crop prediction in JSON format
         # return: preventions in bullet form
         disease = self._get_top_disease(result)
-        prevention = disease["details"]["treatment"].get("prevention", [])
+        prevention = disease.get("details", {}).get("treatment", {}).get("prevention")
+        if not prevention:
+            return "None"
         return "\n".join(f"- {item}" for item in prevention)
-    
+
     def get_all_chemical_treatment(self, result: Dict) -> str:
-        # returns all chemical treatments for the disease from the result
-        # arg. result: crop prediction in json format
+        # Returns all chemical treatments for the disease from the result
+        # arg. result: crop prediction in JSON format
         # return: chemical treatments in bullet form
         disease = self._get_top_disease(result)
-        chemical_treatment = disease["details"]["treatment"].get("chemical treatment", [])
+        chemical_treatment = disease.get("details", {}).get("treatment", {}).get("chemical treatment")
+        if not chemical_treatment:
+            return "None"
         return "\n".join(f"- {item}" for item in chemical_treatment)
-    
+
     def get_all_biological_treatment(self, result: Dict) -> str:
-        # returns all biological treatments for the disease from the result
-        # arg. result: crop prediction in json format
+        # Returns all biological treatments for the disease from the result
+        # arg. result: crop prediction in JSON format
         # return: biological treatments in bullet form
         disease = self._get_top_disease(result)
-        biological_treatment = disease["details"]["treatment"].get("biological treatment", [])
+        biological_treatment = disease.get("details", {}).get("treatment", {}).get("biological treatment")
+        if not biological_treatment:
+            return "None"
         return "\n".join(f"- {item}" for item in biological_treatment)
     
     def get_image_url(self, result: Dict):

@@ -86,9 +86,9 @@ class CropWeatherImpact:
         # return: temperature risk level
         thresholds = {
             "High": (-float("inf"), 0),
-            "Medium": (0, 5),
+            "Moderate": (0, 5),
             "Low": (5, 30),
-            "Medium": (30, 35),
+            "Moderate": (30, 35),
             "High": (35, float("inf"))
         }
         return self._get_risk_level(value, thresholds)
@@ -99,7 +99,7 @@ class CropWeatherImpact:
         # return: precipitation risk level
         thresholds = {
             "High": (50, float("inf")),
-            "Medium": (20, 50),
+            "Moderate": (20, 50),
             "Low": (0, 20)
         }
         return self._get_risk_level(value, thresholds)
@@ -110,7 +110,7 @@ class CropWeatherImpact:
         # return: wind speed risk level
         thresholds = {
             "High": (20, float("inf")),
-            "Medium": (10, 20),
+            "Moderate": (10, 20),
             "Low": (0, 10)
         }
         return self._get_risk_level(value, thresholds)
@@ -131,7 +131,7 @@ class CropWeatherImpact:
         precipitation_risk = self.get_precipitation_risk_level(precipitation) if precipitation is not None else "Low"
         wind_risk = self.get_wind_speed_risk_level(wind_speed) if wind_speed is not None else "Low"
 
-        risk_priority = {"Low": 0, "Medium": 1, "High": 2}
+        risk_priority = {"Low": 0, "Moderate": 1, "High": 2}
 
         return max(
             {temperature_risk, precipitation_risk, wind_risk},

@@ -155,6 +155,7 @@ class ImageProcessing:
             predictions = self._detect_crops(image, latitude, longitude, api_index)
             all_predictions.append(dict(predictions))
 
-        highest_probability_prediction = CropInfo.get_top_prediction(all_predictions)
+        crop_info = CropInfo()
+        highest_probability_prediction = crop_info.get_top_prediction(all_predictions)
 
         return highest_probability_prediction if highest_probability_prediction else {}

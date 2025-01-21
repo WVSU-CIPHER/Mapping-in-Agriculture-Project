@@ -74,62 +74,62 @@ class Database:
         }
         return json.dumps(entry, indent=4)
 
-# [testing purposes]
-if __name__ == "__main__":
-    db = Database()
-    # Example data
-    date = "2025-01-21"
-    time = "14:30:00"
-    crop_data = {
-        "crop_name": "Wheat",
-        "image_url": "https://crop.kindwise.com/media/images/db8c8e328f44427aaab12216e0cc3d5b.jpg",
-        "coordinate": {
-            "latitude": 12.3456,
-            "longitude": 78.9012,
-            "elevation": 123.45,
-        },
-        "disease_risks": {
-            "disease_name": "Rust",
-            "symptoms": "Yellow spots on leaves",
-            "severity": "Moderate",
-            "spreading": "Airborne",
-        },
-        "treatments": {
-            "preventions": "Crop rotation",
-            "chemical_treatment": "Fungicide X",
-            "biological_treatment": "Bacillus subtilis",
-        },
-        "prediction": {
-            "success_rate": 85.5,
-            "weather_impact": {
-                "temperature": 25.5,
-                "temperature_risk_level": "Low",
-                "precipitation": 50.0,
-                "precipitation_risk_level": "Moderate",
-                "wind_speed": 10.0,
-                "wind_speed_risk_level": "Low",
-                "overall_risk_level": "Low",
-            },
-            "disease_impact": {
-                "value": 20.0,
-                "risk_level": "Moderate",
-            },
-            "suggestions": "Increase monitoring and use fungicide if necessary."
-        }
-    }
+# # [testing purposes]
+# if __name__ == "__main__":
+#     db = Database()
+#     # Example data
+#     date = "2025-01-21"
+#     time = "14:30:00"
+#     crop_data = {
+#         "crop_name": "Wheat",
+#         "image_url": "https://crop.kindwise.com/media/images/db8c8e328f44427aaab12216e0cc3d5b.jpg",
+#         "coordinate": {
+#             "latitude": 12.3456,
+#             "longitude": 78.9012,
+#             "elevation": 123.45,
+#         },
+#         "disease_risks": {
+#             "disease_name": "Rust",
+#             "symptoms": "Yellow spots on leaves",
+#             "severity": "Moderate",
+#             "spreading": "Airborne",
+#         },
+#         "treatments": {
+#             "preventions": "Crop rotation",
+#             "chemical_treatment": "Fungicide X",
+#             "biological_treatment": "Bacillus subtilis",
+#         },
+#         "prediction": {
+#             "success_rate": 85.5,
+#             "weather_impact": {
+#                 "temperature": 25.5,
+#                 "temperature_risk_level": "Low",
+#                 "precipitation": 50.0,
+#                 "precipitation_risk_level": "Moderate",
+#                 "wind_speed": 10.0,
+#                 "wind_speed_risk_level": "Low",
+#                 "overall_risk_level": "Low",
+#             },
+#             "disease_impact": {
+#                 "value": 20.0,
+#                 "risk_level": "Moderate",
+#             },
+#             "suggestions": "Increase monitoring and use fungicide if necessary."
+#         }
+#     }
 
-    # Generate JSON string
-    json_string = db.generate_json_string(date, time, crop_data)
-    print("Generated JSON String:")
-    print(json_string)
+#     # Generate JSON string
+#     json_string = db.generate_json_string(date, time, crop_data)
+#     print("Generated JSON String:")
+#     print(json_string)
 
-    # Save the data
-    db.save_data(date, time, crop_data)
+#     # Save the data
+#     db.save_data(date, time, crop_data)
 
-    # Load the latest 3 data entries
-    latest_data = db.load_data(3)
-    for entry in latest_data:
-        print("Date:", entry["datetime"]["date"])
-        print("Time:", entry["datetime"]["time"])
-        print("Crop Name:", entry["data"]["crop_name"])
-        print()
+#     # Load the latest 3 data entries
+#     latest_data = db.load_data(3)
+#     for entry in latest_data:
+#         print("Date:", entry["datetime"]["date"])
+#         print("Time:", entry["datetime"]["time"])
+#         print("Crop Name:", entry["data"]["crop_name"])
+#         print()

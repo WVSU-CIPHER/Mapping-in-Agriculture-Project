@@ -1,87 +1,44 @@
 [
     {
         "datetime": {
-            "date": "2025-01-21",
-            "time": "14:30:00"
+            "date": "2025-01-22",
+            "time": "04:07:09"
         },
         "data": {
-            "crop_name": "Wheat",
-            "image_url": "https://crop.kindwise.com/media/images/db8c8e328f44427aaab12216e0cc3d5b.jpg",
+            "crop_name": "potato",
+            "image_url": "https://crop.kindwise.com/media/images/e8a009dabbd541bb9b7ff8df6fa5a2bc.jpg",
             "coordinate": {
-                "latitude": 12.3456,
-                "longitude": 78.9012,
-                "elevation": 123.45
+                "latitude": 10.6969,
+                "longitude": 122.5644,
+                "elevation": 7.0
             },
             "disease_risks": {
-                "disease_name": "Rust",
-                "symptoms": "Yellow spots on leaves",
-                "severity": "Moderate",
-                "spreading": "Airborne"
+                "disease_name": "Thripidae",
+                "symptoms": "- Leaf drop:  Infected plants may shed their leaves prematurely due to the stress caused by the thripidae infestation.\n- White streaks:  As thrips feed on plant cells, they leave behind white streaks, which becomes noticeable as they strip off the chlorophyll.\n- Stunted growth:  The infestation of thrips often leads to reduced plant growth due to the damage caused to plant tissues.\n- Poor crop yield:  A severe infestation of thripidae can have a detrimental effect on crop yield, causing significant economic losses.\n- Plant discoloration:  Thrips damage plants by sucking their juices causing a silvering or bronzing of the leaf surface.\n- Black spots on leaves:  The waste produced by thrips leaves behind small, black spots on the leaves and may be a notable sign of their presence.\n- Malformed fruits and flowers:  Thripidae impact the plant's ability to produce healthy fruits and flowers, often causing them to become distorted.",
+                "severity": "Thrips, family Thripidae, are extremely harmful pests posing significant threats to a wide variety of plants. They're particularly dangerous during the flowering stage of crops, as they feed on young flowers, fruits, and leaves, leading to stark deformities and potentially great yield reduction. Combating thrips infestations can also be exceptionally challenging, contributing to their severity; they have high reproductive rates and resistance to many pesticides. Besides significant crop damage, thrips can also transmit potentially lethal plant viruses.",
+                "spreading": "Thripidae, commonly known as thrips, spread mainly through wind, human movement, and the transport of infested plants. They have a fast reproduction rate, which allows them to spread quickly, sometimes within a couple of days under optimal conditions. Thrips thrive in warm and humid conditions, which accelerates their breeding cycle and facilitates their distribution. Also, overcrowded plant conditions can favor the rapid spread of these pests."
             },
             "treatments": {
-                "preventions": "Crop rotation",
-                "chemical_treatment": "Fungicide X",
-                "biological_treatment": "Bacillus subtilis"
+                "preventions": "- Regularly inspect plants: Look for signs of thrips or damage to take early action.\n- Provide proper plant care: Healthy, well cared for plants are less likely to succumb to thrips damage.\n- Install screening: Protect your plants from thrips by installing fine mesh screening.\n- Maintain cleanliness: Regularly cleaning the growing area can help to disrupt the life cycle of thrips.\n- Use reflective mulches: These can repel thrips and keep them away from your plants.",
+                "chemical_treatment": "- Apply insecticidal soaps or oils: Generously spray your plants with insecticidal soaps or plant-based oils such as neem oil.\n- Utilize Pyrethrin-based pesticides: Apply these as they have minimal long-term impact and can swiftly knock out the thrips.\n- Implement contact insecticides: Use contact insecticides which can killing thrips on contact but repeat spraying may be needed.\n- Use Systemic Insecticides: Use systemic insecticides like Acephate, it is absorbed by plants and can control thrips from within.\n- Employ Spinosad: This organic insecticide can also be used, but it may impact beneficial insects as well.",
+                "biological_treatment": "- Use beneficial insects: Release beneficial insects like ladybugs & lacewings that naturally prey on thrips.\n- Utilize predatory mites: Introduce predatory mites into your plant environment, as they often feed on thrips larvae.\n- Enable Minute Pirate Bugs: Use these bugs as they are known predators of thrips and can assist in controlling the population.\n- Apply Entomopathogenic Fungi: Apply biopesticides that contain fungi such as Beauveria bassiana or Metarhizium anisopliae, which can infect and kill thrips.\n- Use a combination of organisms: Utilize a combination of biological control agents at the same time for more effective thrip management."
             },
             "prediction": {
-                "success_rate": 85.5,
+                "success_rate": 0.25333333333333335,
                 "weather_impact": {
-                    "temperature": 25.5,
+                    "temperature": 29.7,
                     "temperature_risk_level": "Low",
-                    "precipitation": 50.0,
-                    "precipitation_risk_level": "Moderate",
-                    "wind_speed": 10.0,
+                    "precipitation": 2.3,
+                    "precipitation_risk_level": "Low",
+                    "wind_speed": 23.5,
                     "wind_speed_risk_level": "Low",
-                    "overall_risk_level": "Low"
+                    "overall_risk_level": "High"
                 },
                 "disease_impact": {
-                    "value": 20.0,
-                    "risk_level": "Moderate"
+                    "value": 0.2,
+                    "risk_level": "High"
                 },
-                "suggestions": "Increase monitoring and use fungicide if necessary."
-            }
-        }
-    },
-    {
-        "datetime": {
-            "date": "2025-01-21",
-            "time": "14:30:00"
-        },
-        "data": {
-            "crop_name": "Wheat",
-            "image_url": "https://crop.kindwise.com/media/images/db8c8e328f44427aaab12216e0cc3d5b.jpg",
-            "coordinate": {
-                "latitude": 12.3456,
-                "longitude": 78.9012,
-                "elevation": 123.45
-            },
-            "disease_risks": {
-                "disease_name": "Rust",
-                "symptoms": "Yellow spots on leaves",
-                "severity": "Moderate",
-                "spreading": "Airborne"
-            },
-            "treatments": {
-                "preventions": "Crop rotation",
-                "chemical_treatment": "Fungicide X",
-                "biological_treatment": "Bacillus subtilis"
-            },
-            "prediction": {
-                "success_rate": 85.5,
-                "weather_impact": {
-                    "temperature": 25.5,
-                    "temperature_risk_level": "Low",
-                    "precipitation": 50.0,
-                    "precipitation_risk_level": "Moderate",
-                    "wind_speed": 10.0,
-                    "wind_speed_risk_level": "Low",
-                    "overall_risk_level": "Low"
-                },
-                "disease_impact": {
-                    "value": 20.0,
-                    "risk_level": "Moderate"
-                },
-                "suggestions": "Increase monitoring and use fungicide if necessary."
+                "suggestions": "* Monitor your potato crop regularly for signs of thripidae infestation, such as leaf drop, white streaks, stunted growth, and black spots on leaves, to take early action and prevent the disease from spreading.\n* Provide proper care for your potato plants, including adequate water, nutrients, and pruning, to keep them healthy and strong, making them less susceptible to thripidae damage.\n* Install fine mesh screening around your potato plants to prevent thrips from reaching them and causing damage.\n* Keep your growing area clean by regularly removing weeds and debris, which can help disrupt the life cycle of thrips and prevent infestations.\n* Use reflective mulches around your potato plants to repel thrips and keep them away from your crop.\n* Apply insecticidal soaps or oils, such as neem oil, to your potato plants to kill thrips and prevent further damage.\n* Use Pyrethrin-based pesticides or contact insecticides to quickly knock out thrips, but be sure to repeat spraying as needed to ensure effective control.\n* Consider using systemic insecticides, such as Acephate, which can be absorbed by plants and control thrips from within, but be sure to follow the recommended application rates and timing.\n* Introduce beneficial insects, such as ladybugs or lacewings, into your growing area, which naturally prey on thrips and can help control the population.\n* Use predatory mites or minute pirate bugs, which feed on thrips larvae, to help control the population and prevent further damage.\n* Apply entomopathogenic fungi, such as Beauveria bassiana or Metarhizium anisopliae, which can infect and kill thrips, as a biological control method.\n* Consider using a combination of biological control agents, such as beneficial insects and predatory mites, to achieve more effective thrip management and prevent infestations."
             }
         }
     }

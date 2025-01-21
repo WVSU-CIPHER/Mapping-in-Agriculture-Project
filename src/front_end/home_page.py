@@ -31,7 +31,8 @@ def home_page(page: ft.Page, navigate_to):
         navigate_to(lambda p: analysis_page(p, navigate_to))
         
     def route_to_camera(e):
-        pass
+        from front_end.scan_page import scan_page
+        navigate_to(lambda p: scan_page(p, navigate_to))
         
     def route_to_logs(e):
         pass
@@ -75,7 +76,7 @@ def home_page(page: ft.Page, navigate_to):
                                     controls=[
                                         ft.Image(src=images["weather_icon"]),
                                         ft.Text(
-                                            f"{weather_info.get_temperature()}°C", 
+                                            f"{round(weather_info.get_temperature(), 2)}°C", 
                                             size=sizes["medium_text"], 
                                             color=colors["header_text_color"]
                                         ),
@@ -122,7 +123,7 @@ def home_page(page: ft.Page, navigate_to):
                                 controls=[
                                     ft.Image(src=images["heat_index_icon"]),
                                     ft.Text(
-                                        f"{weather_info.get_heat_index()}°C", 
+                                        f"{round(weather_info.get_heat_index(), 2)}°C", 
                                         size=sizes["small_text"],
                                         color=colors["weather_info_data_color"],
                                     ),
@@ -134,7 +135,7 @@ def home_page(page: ft.Page, navigate_to):
                                 controls=[
                                     ft.Image(src=images["humidity_icon"]),
                                     ft.Text(
-                                        f"{weather_info.get_humidity()}%", 
+                                        f"{round(weather_info.get_humidity(), 2)}%", 
                                         size=sizes["small_text"],
                                         color=colors["weather_info_data_color"],
                                     ),
@@ -146,7 +147,7 @@ def home_page(page: ft.Page, navigate_to):
                                 controls=[
                                     ft.Image(src=images["precipitation_icon"]),
                                     ft.Text(
-                                        f"{weather_info.get_rainfall()} mm", 
+                                        f"{round(weather_info.get_rainfall(), 2)} mm", 
                                         size=sizes["small_text"],
                                         color=colors["weather_info_data_color"],
                                     ),
@@ -158,7 +159,7 @@ def home_page(page: ft.Page, navigate_to):
                                 controls=[
                                     ft.Image(src=images["wind_speed_icon"]),
                                     ft.Text(
-                                        f"{weather_info.get_wind_speed()} m/s", 
+                                        f"{round(weather_info.get_wind_speed(), 2)} m/s", 
                                         size=sizes["small_text"],
                                         color=colors["weather_info_data_color"],
                                     ),
@@ -186,7 +187,7 @@ def home_page(page: ft.Page, navigate_to):
                                 controls=[
                                     ft.Container(
                                         content=ft.Image(
-                                            src="src/assets/landing_background_image.png",
+                                            src=latest_data[i]["data"]["image_url"],
                                             width=80,
                                             height=80,
                                             fit=ft.ImageFit.COVER,
@@ -218,7 +219,7 @@ def home_page(page: ft.Page, navigate_to):
                                                         spacing=0,
                                                         controls=[
                                                             ft.Text(
-                                                                "35%", 
+                                                                f"{round((latest_data[i]["data"]["prediction"]["success_rate"] * 100.0), 2)}%", 
                                                                 size=sizes["small_text"], 
                                                                 color=colors["prediction_info_data_color"]
                                                             ),

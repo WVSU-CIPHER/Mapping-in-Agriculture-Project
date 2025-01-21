@@ -80,7 +80,7 @@ class CropDiseaseRisk:
 
         risk_levels = {
             "High": {"min": 0.0, "max": 0.25},
-            "Medium": {"min": 0.25, "max": 0.5},
+            "Moderate": {"min": 0.25, "max": 0.5},
             "Low": {"min": 0.5, "max": 0.95},
             "Healthy": {"min": 0.95, "max": 1.0},
         }
